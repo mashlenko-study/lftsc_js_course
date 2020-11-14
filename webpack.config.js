@@ -3,8 +3,9 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 const path = require('path');
+/* eslint-disable no-unused-vars */
 const { dirname } = require('path');
-
+/* eslint-disable no-unused-vars */
 const root = path.resolve('projects');
 const projects = fs.readdirSync(root);
 const entries = {};
