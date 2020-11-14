@@ -3,6 +3,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin').CleanWebpackPlugin;
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const fs = require('fs');
 const path = require('path');
+const { dirname } = require('path');
 
 const root = path.resolve('projects');
 const projects = fs.readdirSync(root);
@@ -52,6 +53,7 @@ module.exports = {
       },
       {
         test: /projects\/.+\.html/,
+        include: [path.resolve(__dirname, 'projects')],
         use: [
           { loader: './scripts/html-inject-loader.js' },
           {
