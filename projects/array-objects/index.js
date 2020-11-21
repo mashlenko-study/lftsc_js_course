@@ -42,18 +42,17 @@ function map(array, fn) {
  Пример:
    reduce([1, 2, 3], (all, current) => all + current) // 6
  */
-function reduce(array, fn, initial) {
-  let start, n;
+function reduce(array, fn, initial = 0) {
+  let x, n;
   if (initial) {
-    start = 0;
+    x = 0;
     n = initial;
   } else {
-    start = 1;
+    x = 1;
     n = array[0];
   }
-  for (let i = start; i < array.length; i++) {
-    fn(n, array[i], i, array);
-    n += array[i];
+  for (let i = x; i < array.length; i++) {
+    n = fn(n, array[i], i, array);
   }
   return n;
 }
