@@ -23,13 +23,10 @@ const homeworkContainer = document.querySelector('#app');
 document.addEventListener('mousemove', (e) => {});
 
 export function createDiv() {
-  if (document.getElementById('dragdiv')) {
-    document.getElementById('dragdiv').remove();
-  }
   const contHeight = document.documentElement.clientHeight;
   const contWidth = document.documentElement.clientWidth;
-  const elHeight = Math.floor(contHeight * Math.random());
-  const elWidth = Math.floor(contWidth * Math.random());
+  const elHeight = Math.floor((400 - 20) * Math.random() + 20);
+  const elWidth = Math.floor((400 - 20) * Math.random() + 20);
   const elColor = Math.floor(Math.random() * 16777215).toString(16);
   const elPosX = Math.floor((contWidth - elWidth) * Math.random());
   const elPosY = Math.floor((contHeight - elHeight) * Math.random());
@@ -41,7 +38,7 @@ export function createDiv() {
   newDiv.style.top = elPosY + 'px';
   newDiv.classList.add('draggable-div');
   newDiv.setAttribute('draggable', true);
-  newDiv.setAttribute('id', 'dragdiv');
+  newDiv.setAttribute('id', Date.now());
   newDiv.addEventListener('dragstart', (e) => {
     e.dataTransfer.effectAllowed = 'move';
     const x = e.clientX - e.currentTarget.offsetLeft;
