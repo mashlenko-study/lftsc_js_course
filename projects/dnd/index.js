@@ -26,8 +26,8 @@ export function createDiv() {
   if (document.getElementById('dragdiv')) {
     document.getElementById('dragdiv').remove();
   }
-  const contHeight = homeworkContainer.clientHeight;
-  const contWidth = homeworkContainer.clientWidth;
+  const contHeight = document.documentElement.clientHeight;
+  const contWidth = document.documentElement.clientWidth;
   const elHeight = Math.floor(contHeight * Math.random());
   const elWidth = Math.floor(contWidth * Math.random());
   const elColor = Math.floor(Math.random() * 16777215).toString(16);
@@ -58,14 +58,15 @@ addDivButton.addEventListener('click', function () {
   homeworkContainer.appendChild(newDiv);
 });
 
-homeworkContainer.addEventListener('dragover', (e) => {
+document.addEventListener('dragover', (e) => {
   e.preventDefault();
 });
-homeworkContainer.addEventListener('dragenter', (e) => {
+document.addEventListener('dragenter', (e) => {
   e.preventDefault();
 });
-homeworkContainer.addEventListener('drop', (e) => {
+document.addEventListener('drop', (e) => {
   const data = e.dataTransfer.getData('text/plain').split(',');
+  console.log(e.dataTransfer.items, data, e.clientX, e.clientY);
   const dragTarget = document.getElementById(data[0]);
   const offsetX = e.clientX - data[1];
   const offsetY = e.clientY - data[2];
