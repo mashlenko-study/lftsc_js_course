@@ -67,7 +67,9 @@ listTable.addEventListener('click', (e) => {
 const getCookies = () => {
   const cookie = document.cookie.split('; ').reduce((prev, current) => {
     const [name, value] = current.split('=');
-    prev[name] = value;
+    if (name && value) {
+      prev[name] = value;
+    }
     return prev;
   }, {});
   return cookie;
