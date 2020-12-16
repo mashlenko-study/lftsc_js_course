@@ -101,7 +101,8 @@ button, input[type=range] {
   background-image: url("./img/marker-16.png");
   width: 14px;
   height: 14px;
-  margin-right: 7px;
+  padding-right: 6px;
+  flex-shrink: 0;
 }
 
 .close-icon {

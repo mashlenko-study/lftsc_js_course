@@ -37,12 +37,13 @@ export default class InteractiveMap {
     });
 
     this.clusterer.events.add('click', (e) => {
+      const name = e.get('target').options._name;
       const c = e.get('target').geometry.getCoordinates();
       const coords = [
         Math.round(c[0] * 1000000) / 1000000,
         Math.round(c[1] * 1000000) / 1000000,
       ];
-      this.onClick(coords);
+      this.onClick(coords, name);
     });
 
     this.myMap = new ymaps.Map('map', {
@@ -54,12 +55,13 @@ export default class InteractiveMap {
     this.myMap.behaviors.disable(['scrollZoom']);
     this.myMap.events.add('click', (e) => {
       e.preventDefault();
+      const name = e.get('target').options._name;
       const c = e.get('coords');
       const coords = [
         Math.round(c[0] * 1000000) / 1000000,
         Math.round(c[1] * 1000000) / 1000000,
       ];
-      this.onClick(coords);
+      this.onClick(coords, name);
     });
     this.myMap.geoObjects.add(this.clusterer);
   }
@@ -106,41 +108,14 @@ export default class InteractiveMap {
     this.clusterer.add(placemark);
   }
 
-  openBalloon(coords) {
-    if (this.myMap.balloon.isOpen()) {
-      this.closeBalloon();
-    } else {
-      this.myMap.balloon
-        .open(coords, this.layout, {
-          closeButton: false,
-          mapAutoPan: true,
-          maxWidth: 600,
-          minHeight: 480,
-        })
-        .then(this.loadAddress(coords))
-        .then(() => {
-          document
-            .querySelector('.close-icon')
-            .addEventListener('click', () => this.closeBalloon());
-          const reviewForm = document.getElementById('review-form');
-          reviewForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = document.querySelector('[name="name"]').value;
-            const place = document.querySelector('[name="place"]').value;
-            const text = document.querySelector('[name="review"]').value;
-            const date = new Date().toJSON().slice(0, 10).split('-').reverse().join('.');
-            const obj = {
-              coords: coords,
-              name: name,
-              place: place,
-              text: text,
-              date: date,
-            };
-            localStorage.setItem(Date.now(), JSON.stringify(obj));
-            this.createPlacemark(obj);
-            this.closeBalloon();
-          });
-        });
-    }
+  async openBalloon(coords) {
+    await this.myMap.balloon
+      .open(coords, this.layout, {
+        closeButton: false,
+        mapAutoPan: true,
+        maxWidth: 600,
+        minHeight: 480,
+      })
+      .then(this.loadAddress(coords));
   }
 }

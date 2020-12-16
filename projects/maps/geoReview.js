@@ -51,12 +51,30 @@ export default class GeoReview {
     }
   }
 
-  onClick(coords) {
+  onClick(coords, name) {
+    this.myMap.openBalloon(coords).then(() => {
+      document
+        .querySelector('.close-icon')
+        .addEventListener('click', () => this.myMap.closeBalloon());
+      const reviewForm = document.getElementById('review-form');
+      reviewForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.addReview(coords);
+      });
+    });
+    if (name && name !== 'map') {
+      const reviewList = this.getReviews(coords);
+      this.myMap.openBalloon(coords).then(() => {
+        document.querySelector('.balloon__reviews').prepend(reviewList);
+      });
+    }
+  }
+
+  getReviews(coords) {
     const reviewList = document.createElement('div');
     reviewList.classList.add('review-list');
     for (let i = 0; i < localStorage.length; i++) {
       const obj = JSON.parse(localStorage.getItem(localStorage.key(i)));
-
       if (coords[0] === obj.coords[0] && coords[1] === obj.coords[1]) {
         const reviewInfo = document.createElement('div');
         reviewInfo.classList.add('review__info');
@@ -64,12 +82,7 @@ export default class GeoReview {
         reviewList.appendChild(reviewInfo);
       }
     }
-
-    this.myMap.openBalloon(coords);
-
-    setTimeout(() => {
-      document.querySelector('.balloon__reviews').prepend(reviewList), 500;
-    });
+    return reviewList;
   }
 
   addReview(coords) {
@@ -85,5 +98,7 @@ export default class GeoReview {
       date: date,
     };
     localStorage.setItem(Date.now(), JSON.stringify(obj));
+    this.myMap.createPlacemark(obj);
+    this.myMap.closeBalloon();
   }
 }
