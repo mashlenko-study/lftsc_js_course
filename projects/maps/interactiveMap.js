@@ -38,11 +38,7 @@ export default class InteractiveMap {
 
     this.clusterer.events.add('click', (e) => {
       const name = e.get('target').options._name;
-      const c = e.get('target').geometry.getCoordinates();
-      const coords = [
-        Math.round(c[0] * 1000000) / 1000000,
-        Math.round(c[1] * 1000000) / 1000000,
-      ];
+      const coords = e.get('target').geometry.getCoordinates();
       this.onClick(coords, name);
     });
 
@@ -78,31 +74,22 @@ export default class InteractiveMap {
     this.myMap.balloon.close();
   }
 
-  createPlacemark(obj) {
-    const content = obj;
-
+  createPlacemark(coords) {
     const placemark = new ymaps.Placemark(
-      obj.coords,
-      {
-        hintContent: 'Это хинт',
-        balloonContent: content,
-      },
+      coords,
+      {},
       {
         balloonMinHeight: 500,
         balloonCloseButton: false,
         balloonContentLayout: this.layout,
         iconLayout: 'default#image',
-        iconImageHref: './img/marker.png',
+        iconImageHref: require('./img/marker.png').default,
         iconImageSize: [44, 66],
         iconImageOffset: [-35, -52],
       }
     );
     placemark.events.add('click', (e) => {
-      const c = e.get('target').geometry.getCoordinates();
-      const coords = [
-        Math.round(c[0] * 1000000) / 1000000,
-        Math.round(c[1] * 1000000) / 1000000,
-      ];
+      const coords = e.get('target').geometry.getCoordinates();
       this.onClick(coords);
     });
     this.clusterer.add(placemark);

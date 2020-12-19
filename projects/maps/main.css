@@ -99,6 +99,7 @@ button, input[type=range] {
   content: '';
   display: block;
   background-image: url("./img/marker-16.png");
+  background-repeat: no-repeat;
   width: 14px;
   height: 14px;
   padding-right: 6px;
@@ -106,8 +107,12 @@ button, input[type=range] {
 }
 
 .close-icon {
+  display: block;
   width: 15px;
   height: 15px;
+  background-image: url("./img/close_icon.png");
+  background-repeat: no-repeat;
+  flex-shrink: 0;
 }
 
 .balloon__reviews {
