@@ -23,10 +23,18 @@ export default class MessageHistory {
     const time = `${hours}:${minutes}`;
     const li = document.createElement('li');
     li.classList.add('message-history__item', 'message');
-    const messageText = `<div class="message__author">${sanitize(from)}</div>
+    const img = document.createElement('div');
+    img.setAttribute('data-role', 'userpic');
+    img.setAttribute('data-user', from);
+    img.classList.add('user__pic');
+    img.style.backgroundImage = `url(/chat/photos/${from}.png?t=${Date.now()})`;
+    const messageText = `<div class="message__body"><div class="message__author">${sanitize(
+      from
+    )}</div> <span class="message__time">${time}</span>
     <div class="message__body">${sanitize(message)}</div>
-    <div class="message__time">${time}</div>`;
+    </div>`;
     li.innerHTML = messageText;
+    li.prepend(img);
     this.el.append(li);
   }
 }

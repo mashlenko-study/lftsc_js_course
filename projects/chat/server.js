@@ -105,7 +105,7 @@ function sendMessageFrom(connections, message, from, excludeSelf) {
   }
 }
 
-server.listen(8080);
+server.listen(8282);
 
 // const fs = require('fs');
 // const http = require('http');

@@ -4,12 +4,15 @@ export default class UserPhoto {
     this.onUpload = onUpload;
 
     this.element.addEventListener('dragover', (e) => {
+      console.log(e);
       if (e.dataTransfer.items.length && e.dataTransfer.items[0].kind === 'file') {
         e.preventDefault();
       }
     });
 
     this.element.addEventListener('drop', (e) => {
+      console.log(e);
+      e.preventDefault();
       const file = e.dataTransfer.items[0].getAsFile();
       const reader = new FileReader();
 

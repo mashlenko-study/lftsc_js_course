@@ -291,6 +291,11 @@ input:focus:-webkit-autofill,
   display: flex;
   font-size: 14px;
   margin: 2rem 0.6rem;
+  
+  
+}
+
+.message__body {
   background-color: #182533;
   padding: 10px;
   border: none;
@@ -299,6 +304,7 @@ input:focus:-webkit-autofill,
 }
 
 .message__author {
+  display: inline-block;
   margin-right: 10px;
 }
 
@@ -307,7 +313,8 @@ input:focus:-webkit-autofill,
   color: #FFF;
 }
 
-.message__date {
+.message__time {
+  display: inline;
   color: #7DA8D3;
 }
 

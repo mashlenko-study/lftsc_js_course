@@ -10,12 +10,18 @@ export default class UserList {
     for (const name of this.items) {
       const li = document.createElement('li');
       li.classList.add('user');
-      li.innerHTML = `<div data-role="userpic" class="user__pic"></div>
+      const img = document.createElement('div');
+      img.setAttribute('data-role', 'userpic');
+      img.setAttribute('data-user', name);
+      img.classList.add('user__pic');
+      img.style.backgroundImage = `url(/chat/photos/${name}.png?t=${Date.now()})`;
+      li.innerHTML = `
     <div class="user__info">
       <div data-role="username" class="user__name">${name}
       </div>
       <div class="user__text">Ура</div>
     </div>`;
+      li.prepend(img);
       this.el.append(li);
     }
   }

@@ -59,6 +59,7 @@ export default class Chat {
     this.ui.loginWindow.hide();
     this.ui.chatWindow.show();
     this.ui.userName.set(name);
+    this.ui.userPhoto.set(`/chat/photos/${name}.png?t=${Date.now()}`);
   }
 
   onSend(message) {
@@ -85,7 +86,7 @@ export default class Chat {
       );
 
       for (const avatar of avatars) {
-        avatar.style.backgroundImage = `url(/mega-chat-3/photos/${
+        avatar.style.backgroundImage = `url(/chat/photos/${
           data.name
         }.png?t=${Date.now()})`;
       }
