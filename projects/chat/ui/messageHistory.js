@@ -1,3 +1,5 @@
+import { sanitize } from '../utils';
+
 export default class MessageHistory {
   constructor(el) {
     this.el = el;
@@ -15,11 +17,15 @@ export default class MessageHistory {
   }
 
   addMessage(from, message) {
+    const date = new Date();
+    const hours = String(date.getHours()).padStart(2, 0);
+    const minutes = String(date.getMinutes()).padStart(2, 0);
+    const time = `${hours}:${minutes}`;
     const li = document.createElement('li');
     li.classList.add('message-history__item', 'message');
-    const messageText = `<div class="message__author">${from}</div>
-    <div class="message__body">${message}</div>
-    <div class="message__time">17:59</div>`;
+    const messageText = `<div class="message__author">${sanitize(from)}</div>
+    <div class="message__body">${sanitize(message)}</div>
+    <div class="message__time">${time}</div>`;
     li.innerHTML = messageText;
     this.el.append(li);
   }

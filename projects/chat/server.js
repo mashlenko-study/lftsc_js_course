@@ -18,7 +18,7 @@ const server = http.createServer(async (req, res) => {
     if (/\/photos\/.+\.png/.test(req.url)) {
       const [, imageName] = req.url.match(/\/photos\/(.+\.png)/) || [];
       const fallBackPath = path.resolve(__dirname, './img/default_avatar.png');
-      const filePath = path.resolve(__dirname, './photos', imageName);
+      const filePath = path.resolve(__dirname, './img', imageName);
 
       if (fs.existsSync(filePath)) {
         return fs.createReadStream(filePath).pipe(res);
@@ -29,7 +29,7 @@ const server = http.createServer(async (req, res) => {
       const body = await readBody(req);
       const name = body.name.replace(/\.\.\/|\//, '');
       const [, content] = body.image.match(/data:image\/.+?;base64,(.+)/) || [];
-      const filePath = path.resolve(__dirname, './photos', `${name}.png`);
+      const filePath = path.resolve(__dirname, './img', `${name}.png`);
 
       if (name && content) {
         fs.writeFileSync(filePath, content, 'base64');

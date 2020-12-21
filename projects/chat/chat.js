@@ -67,7 +67,6 @@ export default class Chat {
   }
 
   onMessage({ type, from, data }) {
-    console.log(type, from, data);
     if (type === 'hello') {
       this.ui.userList.add(from);
       this.ui.messageHistory.addSystemMessage(`${from} вошел в чат`);
@@ -79,7 +78,17 @@ export default class Chat {
       this.ui.messageHistory.addMessage(from, data['message']);
     } else if (type === 'bye-bye') {
       this.ui.userList.remove(from);
-      this.ui.messageList.addSystemMessage(`${from} вышел из чата`);
+      this.ui.messageHistory.addSystemMessage(`${from} вышел из чата`);
+    } else if (type === 'photo-changed') {
+      const avatars = document.querySelectorAll(
+        `[data-role=userpic][data-user=${data.name}]`
+      );
+
+      for (const avatar of avatars) {
+        avatar.style.backgroundImage = `url(/mega-chat-3/photos/${
+          data.name
+        }.png?t=${Date.now()})`;
+      }
     }
   }
 }

@@ -291,11 +291,15 @@ input:focus:-webkit-autofill,
   display: flex;
   font-size: 14px;
   margin: 2rem 0.6rem;
+  background-color: #182533;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  width: fit-content;
 }
 
 .message__author {
   margin-right: 10px;
-
 }
 
 .message__body {
