@@ -1,0 +1,75 @@
+<div id="app">
+  <div class="wrapper">
+    <div id="chatroom" class="chatroom hidden">
+      <div class="chatroom__sidebar ">
+        <div class="user">
+          <div data-role="userpic" class="user__pic"></div>
+            <div class="user__info">
+              <div data-role="username" class="user__name">
+              </div>
+              <div class="user__text">Isolation</div>
+            </div>
+        </div>
+        <h2>Все пользователи:</h2>
+        <ul data-role="user-list" class="users__list">
+          <!-- <li class="users__item user">
+            <div data-role="userpic" class="user__pic"></div>
+            <div class="user__info">
+              <div data-role="username" class="user__name">
+              </div>
+              <div class="user__text">Isolation</div>
+            </div>
+          </li> -->
+          <!-- <li class="users__item user">
+            <div alt="" class="user__pic"></div>
+            <div class="user__info">
+              <div class="user__name">Хакимова
+              </div>
+              <div class="user__text">Ура</div>
+            </div>
+          </li> -->
+        </ul>
+      </div>
+      <div class="chatroom__messages">
+        <div data-role="message-history" class="messages__history">
+          <ul data-role="message-history__list" class="message-history__list">
+          </ul>
+        </div>
+        <form data-role="message-send-form" class="messages_send-form" action="">
+          <input data-role="message-box" class="message__box" name="message" id="" placeholder="Введите сообщение..." ></input>
+          <button class="btn btn--send" type="submit">Отправить</button>
+        </form>
+      </div>
+    </div>
+    <div id="login" class="overlay">
+      <div class="authorization">
+        <a
+          href="#"
+          class="authorization__close-icon"
+          alt="кнопка закрытия формы авторизации"
+        ></a>
+        <div class="authorization__img" alt="иконка авторизации чата"></div>
+        <h1 class="authorization__title">Авторизация</h1>
+        <p>Введите, пожалуйста, своё ФИО и имя пользователя для дальнейшей авторизации</p>
+        <form data-role="login-form" action="" class="authorization__form form">
+          <input
+            type="text"
+            data-role="username-input"
+            class="form__input"
+            name="username"
+            id=""
+            placeholder="Введите свое имя"
+          />
+          <input
+            type="password"
+            class="form__input"
+            name="password"
+            id=""
+            placeholder="Введите свой пароль"
+          />
+          <button class="btn" type="submit">Войти</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
